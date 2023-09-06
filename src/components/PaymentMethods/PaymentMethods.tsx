@@ -11,8 +11,10 @@ const PaymentMethods = () => {
 		chooseMethod: state.choosePaymentMethod,
 	}))
 
+
+
 	return (
-		<div className='md:w-2/3'>
+		<div className='md:w-2/3 mb-3'>
 			<div className='flex flex-col gap-2'>
 				<h2 className='text-xl text-gray-400'>Choose a payment method</h2>
 				<div
