@@ -1,0 +1,10 @@
+{
+	"semi": false,
+	"tabWidth": 2,
+	"useTabs": true,
+	"formatOnPaste": true,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"jsxSingleQuote": true,
+	"plugins": ["prettier-plugin-tailwindcss"]
+}
