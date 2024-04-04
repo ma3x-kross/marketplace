@@ -38,7 +38,6 @@ const Products = () => {
 		keepPreviousData: true,
 	})
 
-	console.log(data)
 
 	if (isLoading) return <Loader />
 	if (isError) return <h3>Error</h3>

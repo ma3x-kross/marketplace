@@ -23,9 +23,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 			<Image
 				alt={product.title}
 				src={product.thumbnail}
-				width={300}
-				height={150}
-				className=' h-[150px] w-[300px] object-fill'
+				width='300'
+				height='150'
+				style={{ width: 'auto', height: 'auto' }}
+				className='h-[150px] w-[300px] object-fill'
 			/>
 			<div className='mt-5 px-5 pb-5'>
 				<h5 className='truncate text-xl font-semibold tracking-tight text-gray-900'>
