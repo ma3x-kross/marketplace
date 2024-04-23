@@ -1,7 +1,7 @@
 import React from 'react'
 
 // components
-import Button from '../Button/Button'
+import Button from '@/components/Button'
 
 interface ConfirmationModalProps {
 	message: string

@@ -55,11 +55,7 @@ export const useCartStore = create<CartState>()(
 					const findItem = state.cartItems[findItemIndex]
 					state.totalPrice -= findItem.count * findItem.price
 					state.totalCount -= findItem.count
-					const updatedState = state.cartItems.splice(
-						findItemIndex,
-						findItemIndex,
-					)
-					state.cartItems = updatedState
+					state.cartItems.splice(findItemIndex, 1)
 				})
 			},
 			clearCart: () => {

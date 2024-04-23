@@ -7,13 +7,15 @@ import Loader from '@/components/Loader'
 import Modal from '@/components/Modal'
 import Checkout from '@/components/Checkout'
 import EmptyCart from '@/components/EmptyCart'
+import ConfirmationModal from '@/components/ConfirmationModal'
+import Button from '@/components/Button'
 
 // Types
 import { cartItem } from '@/types/Cart'
 
 // Store
 import { useCartStore } from '@/store/cartStore'
-import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
+
 
 const CartBlock = () => {
 	const { cartItems, clearCart } = useCartStore((state) => ({
@@ -68,14 +70,11 @@ const CartBlock = () => {
 								Cart
 							</h1>
 
-							<button
-								onClick={() => setOpenClearCartModal(true)}
-								className='rounded-lg  bg-indigo-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 '
-							>
+							<Button onClick={() => setOpenClearCartModal(true)}>
 								Clear cart
-							</button>
+							</Button>
 						</div>
-						<div className='  justify-center px-6 md:flex md:space-x-6 xl:px-0'>
+						<div className='justify-center px-6 md:flex md:space-x-6 xl:px-0'>
 							<div className='rounded-lg md:w-3/4'>
 								{items.map((item) => (
 									<CartItem key={item.id} item={item} />

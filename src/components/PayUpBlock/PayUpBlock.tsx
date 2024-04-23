@@ -13,6 +13,7 @@ import { useCartStore } from '@/store/cartStore'
 import Modal from '@/components/Modal'
 import CardPaymentForm from '@/components/CardPaymentForm'
 import Growl from '@/components/Growl'
+import Button from '@/components/Button'
 
 interface PayUpBlockProps {
 	items: cartItem[]
@@ -64,7 +65,7 @@ const PayUpBlock: React.FC<PayUpBlockProps> = ({ items, price }) => {
 						setOpenGrowl(false)
 						clearCart()
 						router.replace('/')
-					}, 3000)
+					}, 2000)
 				}
 			}
 		}
@@ -101,12 +102,9 @@ const PayUpBlock: React.FC<PayUpBlockProps> = ({ items, price }) => {
 						${price} / {price} coins
 					</span>
 				</div>
-				<button
-					onClick={onClickPayUp}
-					className=' mt-2 w-full rounded-md bg-indigo-500 py-1.5 font-medium text-indigo-50 hover:bg-indigo-700'
-				>
+				<Button onClick={onClickPayUp} className='mt-2 rounded-md'>
 					Pay Up
-				</button>
+				</Button>
 			</div>
 		</>
 	)

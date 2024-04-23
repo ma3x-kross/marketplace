@@ -71,7 +71,7 @@ const Categories = () => {
 
 			<div
 				className={`absolute top-12 z-20 flex max-w-[400px] transform flex-wrap items-center justify-center gap-2 rounded-md bg-white p-4 pb-6 shadow-3xl transition-all duration-150 ease-in-out ${
-					open ? 'opacity-100' : 'opacity-0'
+					open ? 'opacity-100' : 'pointer-events-none opacity-0'
 				}   `}
 			>
 				{CATEGORIES.map((item) => (

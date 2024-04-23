@@ -20,7 +20,7 @@ const Balance = () => {
 				<span>Balance: {balance} coins</span>
 				<button
 					onClick={() => setOpenTopUpForm(true)}
-					className=' rounded-[50%] bg-indigo-500 p-1 font-medium text-indigo-50 hover:bg-indigo-700'
+					className='rounded-[50%] bg-indigo-500 p-1 font-medium text-indigo-50 hover:bg-indigo-700'
 				>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
