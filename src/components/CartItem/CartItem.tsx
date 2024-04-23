@@ -10,6 +10,7 @@ import { cartItem } from '@/types/Cart'
 
 // Store
 import { useCartStore } from '@/store/cartStore'
+import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
 
 interface CartItemProps {
 	item: cartItem
@@ -33,30 +34,17 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 	}
 	const onClickDelete = () => {
 		deleteItem(item)
+		setOpenDeleteItemModal(false)
 	}
 
 	return (
 		<>
 			<Modal open={openDeleteItemModal} setOpen={setOpenDeleteItemModal}>
-				<div>
-					<h3 className='font medium mb-4 text-center text-2xl'>
-						Do you really want to delete &quot;{item.title}&quot;?
-					</h3>
-					<div className='flex items-center justify-center gap-2'>
-						<button
-							onClick={() => setOpenDeleteItemModal(false)}
-							className='min-w-[100px] rounded-lg bg-indigo-500 px-5 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300'
-						>
-							No
-						</button>
-						<button
-							onClick={onClickDelete}
-							className='min-w-[100px] rounded-lg  bg-indigo-500 px-5 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 '
-						>
-							Yes
-						</button>
-					</div>
-				</div>
+				<DeleteItemModal
+					title={item.title}
+					onClickYes={() => setOpenDeleteItemModal(false)}
+					onClickNo={onClickDelete}
+				/>
 			</Modal>
 			<div className='mb-6 justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start'>
 				<Image
