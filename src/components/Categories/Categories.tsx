@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
+// store
+import { useFilterStore } from '@/store/filterStore'
 
 // Constants
 import { CATEGORIES } from '@/utils/Constants'
-import { useFilterStore } from '@/store/filterStore'
 
 const Categories = () => {
 	const { category, setCategory } = useFilterStore((state) => ({
@@ -17,13 +19,38 @@ const Categories = () => {
 		setOpen(false)
 	}
 
+	const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') setOpen(false)
+		}
+
+		const handleClickOutside = (e: MouseEvent) => {
+			if (
+				wrapperRef.current &&
+				!e?.composedPath().includes(wrapperRef.current)
+			) {
+				setOpen(false)
+			}
+			document.addEventListener('keydown', handleKeyDown)
+		}
+
+		document.body.addEventListener('click', handleClickOutside)
+
+		return () => {
+			document.body.removeEventListener('click', handleClickOutside)
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [])
+
 	return (
-		<div className='relative w-[300px] min-[450px]:w-[400px]'>
+		<div ref={wrapperRef} className='relative w-[300px] min-[450px]:w-[400px]'>
 			<button
-				className='mx-auto flex w-fit items-center justify-center gap-2  text-2xl font-medium hover:text-indigo-700'
+				className='mx-auto flex w-fit items-center justify-center gap-2 text-xl  font-medium outline-none transition-all duration-100 ease-in-out hover:text-indigo-700 md:text-2xl'
 				onClick={() => setOpen(!open)}
 			>
-				Categories
+				<span>Categories</span>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
@@ -31,7 +58,7 @@ const Categories = () => {
 					strokeWidth={2.5}
 					stroke='currentColor'
 					className={`h-5 w-5 transform transition-transform duration-200 ${
-						open ? 'rotate-180' : 'rotate-0'
+						open ? 'rotate-180' : 'rotate-90'
 					}`}
 				>
 					<path
@@ -43,8 +70,8 @@ const Categories = () => {
 			</button>
 
 			<div
-				className={`shadow-3xl absolute top-12 z-20 flex max-w-[400px] transform flex-wrap items-center justify-center rounded-md bg-white p-4 pb-4 transition duration-200 ease-in-out ${
-					open ? 'scale-100' : 'scale-0'
+				className={`absolute top-12 z-20 flex max-w-[400px] transform flex-wrap items-center justify-center gap-2 rounded-md bg-white p-4 pb-6 shadow-3xl transition-all duration-150 ease-in-out ${
+					open ? 'opacity-100' : 'opacity-0'
 				}   `}
 			>
 				{CATEGORIES.map((item) => (
