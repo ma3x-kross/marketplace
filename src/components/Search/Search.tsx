@@ -1,14 +1,26 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 // Other libraries
 import debounce from 'lodash.debounce'
 import { useFilterStore } from '@/store/filterStore'
 
 const Search = () => {
-	const setSearchValue = useFilterStore((state) => state.setSearchValue)
+	// const setSearchValue = useFilterStore((state) => state.setSearchValue)
+
+	const { searchValue, setSearchValue } = useFilterStore((state) => ({
+		searchValue: state.searchValue,
+		setSearchValue: state.setSearchValue,
+	}))
 
 	const [value, setValue] = useState('')
-	const inputRef = React.useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		if (!searchValue) {
+			setValue('')
+		}
+	}, [searchValue])
+
+	const inputRef = useRef<HTMLInputElement>(null)
 
 	const updateSearchValue = useCallback(
 		debounce((value: string) => {
@@ -17,11 +29,9 @@ const Search = () => {
 		[],
 	)
 	const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setValue(e.target.value)
-		setValue((state) => {
-			updateSearchValue(state)
-			return state
-		})
+		const value = e.target.value
+		setValue(value)
+		updateSearchValue(value)
 	}
 
 	const onClickClear = () => {

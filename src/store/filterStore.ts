@@ -1,5 +1,6 @@
 import { CATEGORIES } from '@/utils/Constants'
 import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
 
 interface FilterState {
 	category: string
@@ -10,13 +11,15 @@ interface FilterState {
 	setCurrentPage: (page: number) => void
 }
 
-export const useFilterStore = create<FilterState>((set) => ({
-	category: CATEGORIES[0],
-	searchValue: '',
-	currentPage: 1,
-	setCategory: (value: string) =>
-		set({ category: value, searchValue: '', currentPage: 1 }),
-	setSearchValue: (value: string) =>
-		set({ searchValue: value, category: CATEGORIES[0], currentPage: 1 }),
-	setCurrentPage: (page: number) => set({ currentPage: page }),
-}))
+export const useFilterStore = create<FilterState>()(
+	devtools((set) => ({
+		category: CATEGORIES[0],
+		searchValue: '',
+		currentPage: 1,
+		setCategory: (value: string) =>
+			set({ category: value, searchValue: '', currentPage: 1 }),
+		setSearchValue: (value: string) =>
+			set({ searchValue: value, category: CATEGORIES[0], currentPage: 1 }),
+		setCurrentPage: (page: number) => set({ currentPage: page }),
+	})),
+)
