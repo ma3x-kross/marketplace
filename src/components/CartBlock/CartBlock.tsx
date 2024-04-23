@@ -13,6 +13,7 @@ import { cartItem } from '@/types/Cart'
 
 // Store
 import { useCartStore } from '@/store/cartStore'
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
 
 const CartBlock = () => {
 	const { cartItems, clearCart } = useCartStore((state) => ({
@@ -39,25 +40,11 @@ const CartBlock = () => {
 	return (
 		<>
 			<Modal open={openClearCartModal} setOpen={setOpenClearCartModal}>
-				<div>
-					<h3 className='font medium mb-4 text-center text-2xl'>
-						Do you really want to empty your shopping cart?
-					</h3>
-					<div className='flex items-center justify-center gap-2'>
-						<button
-							onClick={() => setOpenClearCartModal(false)}
-							className='min-w-[100px] rounded-lg bg-indigo-500 px-5 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300'
-						>
-							No
-						</button>
-						<button
-							onClick={onClickClearCart}
-							className='min-w-[100px] rounded-lg  bg-indigo-500 px-5 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 '
-						>
-							Yes
-						</button>
-					</div>
-				</div>
+				<ConfirmationModal
+					message='Do you really want to empty your shopping cart?'
+					rejectOnClick={() => setOpenClearCartModal(false)}
+					confirmOnClick={onClickClearCart}
+				/>
 			</Modal>
 			<div>
 				{items.length !== 0 ? (

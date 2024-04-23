@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cartStore'
 
 // Types
 import { Product } from '@/types/Product'
+import Button from '../Button/Button'
 
 interface ProductCardProps {
 	product: Product
@@ -36,12 +37,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 					<span className='text-3xl font-bold text-gray-900 '>
 						${product.price}
 					</span>
-					<button
-						onClick={() => onClickAddProduct(product)}
-						className='rounded-lg  bg-indigo-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 '
-					>
+					<Button onClick={() => onClickAddProduct(product)}>
 						Add to cart
-					</button>
+					</Button>
 				</div>
 			</div>
 		</div>

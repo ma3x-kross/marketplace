@@ -4,13 +4,13 @@ import Image from 'next/image'
 
 // Components
 import Modal from '@/components/Modal'
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
 
 // Types
 import { cartItem } from '@/types/Cart'
 
 // Store
 import { useCartStore } from '@/store/cartStore'
-import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
 
 interface CartItemProps {
 	item: cartItem
@@ -40,10 +40,10 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 	return (
 		<>
 			<Modal open={openDeleteItemModal} setOpen={setOpenDeleteItemModal}>
-				<DeleteItemModal
-					title={item.title}
-					onClickYes={() => setOpenDeleteItemModal(false)}
-					onClickNo={onClickDelete}
+				<ConfirmationModal
+					message={`Do you really want to delete "${item.title}"?`}
+					rejectOnClick={() => setOpenDeleteItemModal(false)}
+					confirmOnClick={onClickDelete}
 				/>
 			</Modal>
 			<div className='mb-6 justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start'>
